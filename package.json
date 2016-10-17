@@ -1,0 +1,20 @@
+{
+  "name": "paradise-voice-text-detector",
+  "version": "1.0.0",
+  "description": "A voice-to-text detector based on SoX and Google Speech API",
+  "main": "index.js",
+  "keywords": [
+    "voice",
+    "tts",
+    "sox",
+    "google",
+    "speech"
+  ],
+  "author": "khrall",
+  "license": "MIT",
+  "dependencies": {
+    "@google-cloud/speech": "0.2.0",
+    "googleapis": "14.0.0",
+    "node-uuid": "1.4.7"
+  }
+}

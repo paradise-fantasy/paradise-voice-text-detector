@@ -1,0 +1,1 @@
+# paradise-voice-text-detector
