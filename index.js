@@ -2,6 +2,7 @@ const EventEmitter = require('events');
 const fs = require('fs');
 const exec = require('child_process').exec;
 const { v4 } = require('node-uuid');
+const Speech = require('@google-cloud/speech');
 
 const recordingConfig = {
   encoding: 'FLAC',
@@ -14,7 +15,7 @@ class VoiceDetector extends EventEmitter {
     this.active = false;
   }
 
-  configure(credentials, props) {
+  configure(credentials, props = {}) {
     if (!credentials) throw new Error('Credentials must be defined!');
 
     this.speech = new Speech(credentials);
@@ -24,12 +25,16 @@ class VoiceDetector extends EventEmitter {
     if (!fs.existsSync(this.tmpDir)) {
       fs.mkdirSync(this.tmpDir);
     }
+
+    this.configured = true;
   }
 
   doRecord() {
     return new Promise((resolve, reject) => {
       const recordingID = v4();
+      console.log(recordingID);
       exec(`sox -t alsa default -r 16000 -c 1 ${this.tmpDir}/${recordingID}.flac silence 1 0.1 10% 1 1.0 10%`, (error, stdout, stderr) => {
+        console.log('Done?');
         if (error) return reject(error);
         resolve(recordingID);
       });
@@ -69,6 +74,7 @@ class VoiceDetector extends EventEmitter {
   }
 
   startRecording() {
+    if (!this.configured) throw new Error('Please configure the detector before using it');
     this.active = true;
     this.newRecording();
   }
