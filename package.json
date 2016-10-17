@@ -1,6 +1,6 @@
 {
   "name": "paradise-voice-text-detector",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A voice-to-text detector based on SoX and Google Speech API",
   "main": "index.js",
   "keywords": [
