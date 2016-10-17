@@ -74,4 +74,4 @@ class VoiceDetector extends EventEmitter {
   }
 }
 
-exports = VoiceDetector;
+module.exports = VoiceDetector;
